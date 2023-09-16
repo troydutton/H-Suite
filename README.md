@@ -10,9 +10,9 @@ To get started with this project, follow these steps:
 
 ## Authors
 
+- Jasper Tan
 - Haakon Mongstad
 - Jibran Cutlerywala
 - Yuvraj Khullar
 - Luca Macesanu
-- Jasper Tan
 - Troy Dutton
