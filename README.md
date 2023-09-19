@@ -16,3 +16,6 @@ To get started with this project, follow these steps:
 - Yuvraj Khullar
 - Luca Macesanu
 - Troy Dutton
+
+# Useful Links
+https://docs.google.com/document/d/1rREMYh2eRJrQb0zMIihBB1D_p-PS3HYOJI4QeCMYmmk/edit
