@@ -84,7 +84,7 @@ if __name__ == "__main__":
         add_entry(connection, "John", 30)
         add_entry(connection, "Alice", 25)
         check_entries(connection)
-        drop_table(connection)
+        # drop_table(connection)
         connection.close()
     else:
         print("connection failed")
