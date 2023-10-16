@@ -7,7 +7,7 @@ app = Flask(__name__)
 def login():
     data = request.get_json()
     
-    userid = data.get('userid')
+    userid = int(data.get('userid'))
     user = data.get('user')
     password = data.get('password')
 
@@ -20,7 +20,7 @@ def login():
 def signup():
     data = request.get_json()
     
-    userid = data.get('userid')
+    userid = int(data.get('userid'))
     user = data.get('user')
     password = data.get('password')
 
