@@ -1,0 +1,22 @@
+import random
+
+class UniqueIDGenerator:
+    def __init__(self, id_length=8):
+        self.id_length = id_length
+        self.generated_ids = set()
+
+    def generate_unique_id(self):
+        while True:
+            new_id = ''.join(random.choices('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', k=self.id_length))
+            if new_id not in self.generated_ids:
+                self.generated_ids.add(new_id)
+                return new_id
+
+# Example usage:
+if __name__ == '__main__':
+    id_generator = UniqueIDGenerator()
+
+    # Generate unique IDs
+    for _ in range(10):
+        unique_id = id_generator.generate_unique_id()
+        print(unique_id)
