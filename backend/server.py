@@ -7,11 +7,14 @@ app = Flask(__name__)
 def login():
     data = request.get_json()
     
-    userid = int(data.get('userid'))
+    userid = data.get('userid')
     user = data.get('user')
     password = data.get('password')
 
-    if database.verify_credentials(userid, user, password):
+    if userid == None or user == None or password == None:
+        return "False"
+
+    if database.verify_credentials(int(userid), user, password):
         return "True"
     else:
         return "False"
@@ -20,11 +23,14 @@ def login():
 def signup():
     data = request.get_json()
     
-    userid = int(data.get('userid'))
+    userid = data.get('userid')
     user = data.get('user')
     password = data.get('password')
 
-    if database.create_user(userid, user, password):
+    if userid == None or user == None or password == None:
+        return "False"
+
+    if database.create_user(int(userid), user, password):
         return "True"
     else:
         return "False"
