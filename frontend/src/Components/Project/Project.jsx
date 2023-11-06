@@ -53,6 +53,9 @@ class Project extends Component {
   };
 
   render() {
+    const {
+      state
+    } = this.props;
 
     const {
       projectName,
@@ -61,7 +64,7 @@ class Project extends Component {
       isJoined,
       showAuthorizedUsers,
       authorizedUsers,
-    } = this.props; // Access props passed from Manager component
+    } = state; // Access props passed from Manager component
 
     const {
       inputValueCheckIn: inputValueCheckIn1,

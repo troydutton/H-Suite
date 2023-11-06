@@ -39,12 +39,7 @@ export class Manager extends Component {
           {this.projects.map((project) => (
             <Project
               // key={project.id}
-              projectName={project.name}
-              hardwareSet1={this.state.hardwareSet1}
-              hardwareSet2={this.state.hardwareSet2}
-              isJoined={this.state.isJoined}
-              showAuthorizedUsers={this.state.showAuthorizedUsers}
-              authorizedUsers={this.state.authorizedUsers}
+              state={this.state}
             />
           ))}
         </div>
