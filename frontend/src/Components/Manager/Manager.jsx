@@ -1,11 +1,29 @@
 // Manager.jsx
-import React, { Component } from 'react';
 import Project from '../Project/Project';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import './Manager.css';
 
-export class Manager extends Component {
-  // Sample project data, replace with your project data from MongoDB
-  projects = [
+export const Manager = ({user}) => {
+  const navigate = useNavigate();
+
+  const logout = async () => {
+    const response = await fetch('/logout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user: user,
+      })
+    });
+
+    const data = await response.json();
+
+    navigate('/');
+  }
+
+  const projects = [
     {
       projectId: 1,
       projectName: 'Sample Project 1',
@@ -46,23 +64,19 @@ export class Manager extends Component {
     },
   ];
 
-  render() {
-    return (
-      <div className="manager-container">
-        <button className="logout-button" onClick={this.handleLogout}>
-          Logout
-        </button>
-        <h1>Project Manager</h1>
-        <div className="project-grid">
-          {this.projects.map((project) => (
-            <Project
-              project={project}
-            />
-          ))}
-        </div>
+  return (
+    <div className="manager-container">
+      <button className="logout-button" onClick={logout}>
+        Logout
+      </button>
+      <h1>Project Manager</h1>
+      <div className="project-grid">
+        {projects.map((project) => (
+          <Project
+            project={project}
+          />
+        ))}
       </div>
-    );
-  }
+    </div>
+  );
 }
-
-export default Manager;
