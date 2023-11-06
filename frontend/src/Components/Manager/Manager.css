@@ -1,6 +1,6 @@
 /* Manager.css */
 .manager-container {
-    text-align: center;
+    text-align: right;
     background: -webkit-linear-gradient(#EC9F05, #FF4E00);
     /* Fallback for older browsers */
     background: linear-gradient(#EC9F05, #FF4E00);
@@ -16,6 +16,14 @@
     border-bottom: 1px solid #ccc;
     -webkit-text-fill-color: #fdfdfd;
 
+  }
+  .logout-button {
+    margin: 0 auto;
+    width: fit-content;
+    padding: 5px;
+    align-items: right;
+    text-align: right;
+    align-self: right;
   }
   
   .project-grid {
