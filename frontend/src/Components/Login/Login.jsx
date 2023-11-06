@@ -53,6 +53,7 @@ export const Login = ({user, setUser, login}) => {
             <button style={{background: "#eaeaea", color: "gray"}} onClick={signup}> Sign Up </button>
             <button style={{background: "-webkit-linear-gradient(#EC9F05, #FF4E00)"}} onClick={() => login(password)}> Login </button>
         </div>
+      </div>
     </div>
   )
 }
