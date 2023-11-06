@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import './Manager.css';
 
-export const Manager = ({user, projects}) => {
+export const Manager = ({ user, projects }) => {
   const navigate = useNavigate();
 
   const logout = async () => {
@@ -23,6 +23,9 @@ export const Manager = ({user, projects}) => {
 
   return (
     <div className="manager-container">
+      <button className="logout-button" onClick={logout}>
+        Menu
+      </button>
       <button className="logout-button" onClick={logout}>
         Logout
       </button>

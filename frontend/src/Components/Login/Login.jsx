@@ -34,21 +34,20 @@ export const Login = ({user, setUser, login}) => {
       }
     }
 
-    return (
+  return (
     <div className='container'>
-        <div className='header'>
-            <div className='text'>Login</div>
-            <div className='underline'></div>
+      <div className='header'>
+        <div className='text'>Login</div>
+        <div className='underline'></div>
+      </div>
+      <div className='inputs'>
+        <div className='input'>
+          <img src={user_icon} alt="" />
+          <input type="text" placeholder='Username' onChange={(e) => setUser(e.target.value)} />
         </div>
-        <div className='inputs'> 
-            <div className='input'> 
-                <img src={user_icon} alt="" />
-                <input type="text" placeholder='Username' onChange={(e) => setUser(e.target.value)}/>
-            </div>
-            <div className='input'> 
-                <img src={password_icon} alt="" />
-                {<input type="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)}/>}
-            </div>
+        <div className='input'>
+          <img src={password_icon} alt="" />
+          {<input type="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)} />}
         </div>
         <div className='submit-container'>
             <button style={{background: "#eaeaea", color: "gray"}} onClick={signup}> Sign Up </button>
