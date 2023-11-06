@@ -1,0 +1,28 @@
+/* Manager.css */
+.manager-container {
+    text-align: center;
+    background: -webkit-linear-gradient(#EC9F05, #FF4E00);
+    /* Fallback for older browsers */
+    background: linear-gradient(#EC9F05, #FF4E00);
+    min-height: 100vh;
+  }
+  
+
+.manager-container h1 {
+    /* make the title appear on the center of screen */
+    margin: 0 auto;
+    width: fit-content;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+    -webkit-text-fill-color: #fdfdfd;
+
+  }
+  
+  .project-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust the gap between projects */
+    margin: 20px;
+
+  }
+  
