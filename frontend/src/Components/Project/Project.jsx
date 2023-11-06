@@ -120,12 +120,14 @@ class Project extends Component {
                 className='inputBox'
                 type="number"
                 name="inputValueCheckIn"
+                placeholder="0"  
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet1', 'inputValueCheckIn')}
               />
               <button className="check-Button" onClick={() => this.handleCheckIn('hardwareSet1')}>Check In</button>
               <input
                 type="number"
                 name="inputValueCheckOut"
+                placeholder="0"  
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet1', 'inputValueCheckOut')}
               />
               <button className="check-Button" onClick={() => this.handleCheckOut('hardwareSet1')}>Check Out</button>
@@ -149,12 +151,14 @@ class Project extends Component {
               <input
                 type="number"
                 name='inputValueCheckIn'
+                placeholder="0"  
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet2', 'inputValueCheckIn')}
               />
               <button className="check-Button" onClick={() => this.handleCheckIn('hardwareSet2')}>Check In</button>
               <input
                 type="number"
                 name="inputValueCheckOut"
+                placeholder="0"  
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet2', 'inputValueCheckOut')}
               />
               <button className="check-Button" onClick={() => this.handleCheckOut('hardwareSet2')}>Check Out</button>
