@@ -22,13 +22,10 @@ def signup():
     user = data.get('user')
     password = data.get('password')
 
-    if user == None or password == None:
-        return "False"
-
     if database.create_user(user, password):
-        return "True"
+        return jsonify({"success": True})
     else:
-        return "False"
+        return jsonify({"success": False})
 
 
 if __name__ == "__main__":
