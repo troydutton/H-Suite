@@ -88,7 +88,7 @@ def create_project(projectname: str, username: str) -> bool:
         return False
     
     # Add project
-    projects.insert_one({"id": generate_projectid(), "projectname": projectname, "users": [username]})
+    projects.insert_one({"id": generate_projectid(), "project_name": projectname, "checked_out": [0, 0], "users": [username]})
     
     return True
 

@@ -2,7 +2,7 @@ import './Login.css'
 
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import user_icon from '../Assets/person.png'
@@ -28,7 +28,7 @@ export const Login = ({user, setUser, login}) => {
       const data = await response.json();
 
       if (data.success) {
-        navigate('/dashboard');
+        navigate('/new-button');
       } else {
         toast.warning("Unable to create account.");
       }
@@ -54,7 +54,6 @@ export const Login = ({user, setUser, login}) => {
             <button style={{background: "#eaeaea", color: "gray"}} onClick={signup}> Sign Up </button>
             <button style={{background: "-webkit-linear-gradient(#EC9F05, #FF4E00)"}} onClick={() => login(password)}> Login </button>
         </div>
-        <ToastContainer />
     </div>
   )
 }
