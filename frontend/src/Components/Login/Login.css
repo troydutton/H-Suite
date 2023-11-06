@@ -2,10 +2,11 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    margin-top: 200px;
+    margin-top: 100px;
+    margin-bottom: 100px;
     width: 600px;
     background: #fff;
-    padding-bottom: 30px;
+    border-radius: 50px;
 }
 
 .header{
@@ -20,10 +21,10 @@
 .text{
     background: -webkit-linear-gradient(#EC9F05, #FF4E00);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 48px;
     font-weight: 700;
-
 }
 
 .underline {
@@ -63,21 +64,6 @@
     outline: none;
     color: gray;
     font-size: 19px;
-}
-
-.forgot-password{
-    padding-left: 52px;
-    margin-top: 27px;
-    color: gray;
-    font-size: 18px;
-
-}
-
-.forgot-password span{
-    background: -webkit-linear-gradient(#EC9F05, #FF4E00);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    cursor: pointer;
 }
 
 .submit-container {
