@@ -6,30 +6,43 @@ import './Manager.css';
 export class Manager extends Component {
   // Sample project data, replace with your project data from MongoDB
   projects = [
-    { id: 1, name: 'Project 1' },
-    { id: 2, name: 'Project 2' },
-    { id: 3, name: 'Project 3' },
-    // Add more projects here
+    {
+      projectId: 1,
+      projectName: 'Sample Project 1',
+      isJoined: false,
+      authorizedUsers: ['Dumb Troy', 'Happy Haakon', 'BOOP'], // Example authorized users
+      hardwareSets: [
+        {
+          hardwareName: "Drill Troy",
+          totalCapacity: 50,
+          checkedOut: 10,
+        },
+        {
+          hardwareName: "Hammer Haakon",
+          totalCapacity: 30,
+          checkedOut: 15,
+        },
+      ],
+    },
+    {
+      projectId: 2,
+      projectName: 'Sample Project 2',
+      isJoined: false,
+      authorizedUsers: ['Dumb Troy', 'Happy Haakon', 'BOOP'], // Example authorized users
+      hardwareSets: [
+        {
+          hardwareName: "Toy Troy",
+          totalCapacity: 50,
+          checkedOut: 10,
+        },
+        {
+          hardwareName: "Humping Haakon",
+          totalCapacity: 30,
+          checkedOut: 15,
+        },
+      ],
+    },
   ];
-
-  state = {
-    projectName: 'Sample Project',
-    hardwareSet1: {
-      totalCapacity: 50,
-      checkedOut: 10,
-      inputValueCheckIn: 0, // Update state property for check-in input
-      inputValueCheckOut: 0, // Update state property for check-out input
-    },
-    hardwareSet2: {
-      totalCapacity: 30,
-      checkedOut: 5,
-      inputValueCheckIn: 0, // Update state property for check-in input
-      inputValueCheckOut: 0, // Update state property for check-out input
-    },
-    isJoined: false, // Added state for button state
-    showAuthorizedUsers: false, // Added state for dropdown visibility
-    authorizedUsers: ['User 1', 'User 2', 'User 3'], // Example authorized users
-  };
 
   render() {
     return (
@@ -38,8 +51,7 @@ export class Manager extends Component {
         <div className="project-grid">
           {this.projects.map((project) => (
             <Project
-              // key={project.id}
-              state={this.state}
+              project={project}
             />
           ))}
         </div>

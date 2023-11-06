@@ -3,6 +3,16 @@ import React, { Component } from 'react';
 import './Project.css';
 
 class Project extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValueCheckIn1: 0, // Update state property for check-in input
+      inputValueCheckOut1: 0, // Update state property for check-out input
+      inputValueCheckIn2: 0, // Update state property for check-in input
+      inputValueCheckOut2: 0, // Update state property for check-out input
+      showAuthorizedUsers: false, // Added state for dropdown
+    };
+  }
 
   handleInputChange = (e, hardwareSet, inputType) => {
     this.setState({
@@ -54,39 +64,35 @@ class Project extends Component {
 
   render() {
     const {
-      state
+      project
     } = this.props;
 
     const {
+      projectId,
       projectName,
-      hardwareSet1,
-      hardwareSet2,
       isJoined,
-      showAuthorizedUsers,
       authorizedUsers,
-    } = state; // Access props passed from Manager component
+      hardwareSets,
+    } = project; // Access props passed from Manager component
 
     const {
-      inputValueCheckIn: inputValueCheckIn1,
-      inputValueCheckOut: inputValueCheckOut1,
+      hardwareName: hardwareName1,
       checkedOut: checkedOut1,
       totalCapacity: totalCapacity1,
-    } = hardwareSet1;
+    } = hardwareSets[0];
 
     const {
-      inputValueCheckIn: inputValueCheckIn2,
-      inputValueCheckOut: inputValueCheckOut2,
+      hardwareName: hardwareName2,
       checkedOut: checkedOut2,
       totalCapacity: totalCapacity2,
-    } = hardwareSet2;
-
+    } = hardwareSets[1];
 
     return (
       <div className="project-container">
         <h2>{projectName}</h2>
         <div className="hardware-sets">
           <div className="hardware-set-box">
-            <h3>Hardware Set 1</h3>
+            <h3>{hardwareName1}</h3>
             <div className="hardware-set">
               <div className="label-value-box">
                 <div className="label">Availability</div>
@@ -97,21 +103,21 @@ class Project extends Component {
               <input
                 type="number"
                 name="inputValueCheckIn"
-                value={inputValueCheckIn1}
+                value={this.state.inputValueCheckIn1}
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet1', 'inputValueCheckIn')}
               />
               <button onClick={() => this.handleCheckIn('hardwareSet1')}>Check In</button>
               <input
                 type="number"
                 name="inputValueCheckOut"
-                value={inputValueCheckOut1}
+                value={this.state.inputValueCheckOut1}
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet1', 'inputValueCheckOut')}
               />
               <button onClick={() => this.handleCheckOut('hardwareSet1')}>Check Out</button>
             </div>
           </div>
           <div className="hardware-set-box">
-            <h3>Hardware Set 2</h3>
+            <h3>{hardwareName2}</h3>
             <div className="hardware-set">
               <div className="label-value-box">
                 <div className="label">Availability</div>
@@ -122,14 +128,14 @@ class Project extends Component {
               <input
                 type="number"
                 name='inputValueCheckIn'
-                value={inputValueCheckIn2}
+                value={this.state.inputValueCheckIn2}
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet2', 'inputValueCheckIn')}
               />
               <button onClick={() => this.handleCheckIn('hardwareSet2')}>Check In</button>
               <input
                 type="number"
                 name="inputValueCheckOut"
-                value={inputValueCheckOut2}
+                value={this.state.inputValueCheckOut2}
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet2', 'inputValueCheckOut')}
               />
               <button onClick={() => this.handleCheckOut('hardwareSet2')}>Check Out</button>
@@ -144,7 +150,7 @@ class Project extends Component {
             {isJoined ? 'Leave Project' : 'Join Project'}
           </button>
           <button onClick={this.handleToggleAuthorizedUsers}>Authorized Users</button>
-          {showAuthorizedUsers && (
+          {this.state.showAuthorizedUsers && (
             <div className="authorized-users-dropdown">
               <ul>
                 {authorizedUsers.map((user, index) => (
