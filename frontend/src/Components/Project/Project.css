@@ -102,6 +102,7 @@
   transition: 0.3s;
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-right: 10px;
 }
 
 .check-Button:hover {
@@ -179,6 +180,5 @@
   background-color: rgba(23, 26, 32, 1);
   cursor: pointer;
 }
-
 
 /* Add additional styles as needed */

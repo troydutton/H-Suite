@@ -99,7 +99,7 @@ class Project extends Component {
 
     return (
       <div className="project-container">
-        <h2>{projectName}</h2>
+        <h2>{`${projectName} (${projectId})`}</h2>
         <div className="hardware-sets">
           <div className="hardware-set-box">
             <h3>{hardwareName1}</h3>
