@@ -3,24 +3,6 @@ import React, { Component } from 'react';
 import './Project.css';
 
 class Project extends Component {
-  state = {
-    projectName: 'Sample Project',
-    hardwareSet1: {
-      totalCapacity: 50,
-      checkedOut: 10,
-      inputValueCheckIn: 0, // Update state property for check-in input
-      inputValueCheckOut: 0, // Update state property for check-out input
-    },
-    hardwareSet2: {
-      totalCapacity: 30,
-      checkedOut: 5,
-      inputValueCheckIn: 0, // Update state property for check-in input
-      inputValueCheckOut: 0, // Update state property for check-out input
-    },
-    isJoined: false, // Added state for button state
-    showAuthorizedUsers: false, // Added state for dropdown visibility
-    authorizedUsers: ['User 1', 'User 2', 'User 3'], // Example authorized users
-  };
 
   handleInputChange = (e, hardwareSet, inputType) => {
     this.setState({
@@ -71,9 +53,30 @@ class Project extends Component {
   };
 
   render() {
-    const { projectName, isJoined, showAuthorizedUsers, authorizedUsers } = this.state;
-    const {inputValueCheckIn: inputValueCheckIn1, inputValueCheckOut: inputValueCheckOut1, checkedOut: checkedOut1, totalCapacity: totalCapacity1} = this.state.hardwareSet1;
-    const {inputValueCheckIn: inputValueCheckIn2, inputValueCheckOut: inputValueCheckOut2, checkedOut: checkedOut2, totalCapacity: totalCapacity2} = this.state.hardwareSet2;
+
+    const {
+      projectName,
+      hardwareSet1,
+      hardwareSet2,
+      isJoined,
+      showAuthorizedUsers,
+      authorizedUsers,
+    } = this.props; // Access props passed from Manager component
+
+    const {
+      inputValueCheckIn: inputValueCheckIn1,
+      inputValueCheckOut: inputValueCheckOut1,
+      checkedOut: checkedOut1,
+      totalCapacity: totalCapacity1,
+    } = hardwareSet1;
+
+    const {
+      inputValueCheckIn: inputValueCheckIn2,
+      inputValueCheckOut: inputValueCheckOut2,
+      checkedOut: checkedOut2,
+      totalCapacity: totalCapacity2,
+    } = hardwareSet2;
+
 
     return (
       <div className="project-container">
@@ -101,7 +104,7 @@ class Project extends Component {
                 value={inputValueCheckOut1}
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet1', 'inputValueCheckOut')}
               />
-              <button onClick={() => this.handleCheckOut('hardwareSet1')}>Check Out</button>           
+              <button onClick={() => this.handleCheckOut('hardwareSet1')}>Check Out</button>
             </div>
           </div>
           <div className="hardware-set-box">
@@ -126,7 +129,7 @@ class Project extends Component {
                 value={inputValueCheckOut2}
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet2', 'inputValueCheckOut')}
               />
-              <button onClick={() => this.handleCheckOut('hardwareSet2')}>Check Out</button>            
+              <button onClick={() => this.handleCheckOut('hardwareSet2')}>Check Out</button>
             </div>
           </div>
         </div>

@@ -5,7 +5,7 @@ import { Manager } from './Components/Manager/Manager';
 function App() {
   return (
     <div >
-      <Login />
+      <Manager />
     </div>
   );
 }

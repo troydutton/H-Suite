@@ -12,13 +12,40 @@ export class Manager extends Component {
     // Add more projects here
   ];
 
+  state = {
+    projectName: 'Sample Project',
+    hardwareSet1: {
+      totalCapacity: 50,
+      checkedOut: 10,
+      inputValueCheckIn: 0, // Update state property for check-in input
+      inputValueCheckOut: 0, // Update state property for check-out input
+    },
+    hardwareSet2: {
+      totalCapacity: 30,
+      checkedOut: 5,
+      inputValueCheckIn: 0, // Update state property for check-in input
+      inputValueCheckOut: 0, // Update state property for check-out input
+    },
+    isJoined: false, // Added state for button state
+    showAuthorizedUsers: false, // Added state for dropdown visibility
+    authorizedUsers: ['User 1', 'User 2', 'User 3'], // Example authorized users
+  };
+
   render() {
     return (
       <div className="manager-container">
         <h1>Project Manager</h1>
         <div className="project-grid">
           {this.projects.map((project) => (
-            <Project key={project.id} projectName={project.name} />
+            <Project
+              // key={project.id}
+              projectName={project.name}
+              hardwareSet1={this.state.hardwareSet1}
+              hardwareSet2={this.state.hardwareSet2}
+              isJoined={this.state.isJoined}
+              showAuthorizedUsers={this.state.showAuthorizedUsers}
+              authorizedUsers={this.state.authorizedUsers}
+            />
           ))}
         </div>
       </div>
