@@ -1,37 +1,60 @@
-import React, { useState } from 'react'
 import './Login.css'
+
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import user_icon from '../Assets/person.png'
 import password_icon from '../Assets/password.png'
 
 export const Login = () => {
+    const navigate = useNavigate();
+
     const [user, setUser] = useState(null);
     const [password, setPassword] = useState(null);
 
     const login = async () => {
-        await fetch('/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            user: user,
-            password: password
-          })
+      const response = await fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user: user,
+          password: password
         })
-      }
+      });
 
-      const signup = async () => {
-        await fetch('/signup', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            user: user,
-            password: password
-          })
-        })
+      const data = await response.json();
+
+      if (data.success) {
+        navigate('/dashboard');
+      } else {
+        toast.error("Invalid credentials.");
       }
+    }
+
+    const signup = async () => {
+      const response = await fetch('/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user: user,
+          password: password
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        navigate('/dashboard');
+      } else {
+        toast.warning("Unable to create account.");
+      }
+    }
 
     return (
     <div className='container'>
@@ -53,6 +76,7 @@ export const Login = () => {
             <button style={{background: "#eaeaea", color: "gray"}} onClick={signup}> Sign Up </button>
             <button style={{background: "-webkit-linear-gradient(#EC9F05, #FF4E00)"}} onClick={login}> Login </button>
         </div>
+        <ToastContainer />
     </div>
   )
 }

@@ -26,7 +26,7 @@ def generate_userid() -> int:
         return 1
     
     # Get last id
-    return users.find_one(sort=[("_id", -1)])["_id"] + 1
+    return users.find_one(sort=[("id", -1)])["id"] + 1
 
 def create_user(username: str, password: str) -> bool:
     if username == None or password == None:
@@ -37,7 +37,7 @@ def create_user(username: str, password: str) -> bool:
         return False
     
     # Add user
-    users.insert_one({"_id": generate_userid(), "username": username, "password": encrypt(password, 10, 1)})
+    users.insert_one({"id": generate_userid(), "username": username, "password": encrypt(password, 10, 1), "active": True})
     
     return True
 
@@ -47,8 +47,9 @@ def verify_credentials(username: str, password: str) -> bool:
     
     user = users.find_one({"username": username, "password": encrypt(password, 10, 1)})
 
-    # User doesn't exist or password is incorrect
+    # Verify user exists and is not active
     if user == None:
         return False
 
+    users.update_one({"id": user["id"]}, {"$set": {"active": True}})
     return True
