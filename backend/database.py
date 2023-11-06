@@ -120,7 +120,6 @@ def checkout_hardware(projectid: int, hwset: str, qty: int) -> bool:
     if projects.find_one({"id": projectid}) == None:
         return False
     
-    
     # verify hwset exists
     if hwsets.find_one({"name": hwset}) == None:
         return False
@@ -131,6 +130,9 @@ def checkout_hardware(projectid: int, hwset: str, qty: int) -> bool:
     
     # Update hwset
     hwsets.update_one({"name": hwset}, {"$inc": {"available": -qty}})
+
+    # Update project
+    projects.update_one({"id": projectid}, {"$inc": {"checkedOut." + str(hwsets.find_one({"name": hwset})["index"]): qty}})
     
     return True
 
@@ -151,17 +153,32 @@ def checkin_hardware(projectid: int, hwset: str, qty: int) -> bool:
     
     return True
 
-def get_projects(username: str) -> list:
-    if username == None:
+def get_projects(user_id: str) -> list:
+    if user_id == None:
         return []
     
     # Verify user exists
-    if users.find_one({"username": username}) == None:
+    if users.find_one({"id": user_id}) == None:
         return []
+
+    # get username from user_id
+    username = users.find_one({"id": user_id})["username"]
     
     # Get projects
     projects_list = []
     for project in projects.find({"users": username}):
-        projects_list.append({"id": project["id"], "projectname": project["projectname"]})
+
+        entry = {"projectId": project["id"], 
+                 "projectName": project["projectname"],
+                 "authorizedUsers": project["users"],
+                 "hardwareSets": []}
+        
+        # iterate through hwsets sorted by their id
+        i = 0
+        for hwset in hwsets.find().sort("id", 1):
+            entry["hardwareSets"].append({"hardwareName": hwset["name"], "totalCapacity": hwset["capacity"], 'availability': hwset["availability"]})
+            entry["hardwareSets"][i]["checkedOut"] = project["checkedOut"][hwset["index"]]
+
+        projects_list.append(entry)
     
     return projects_list
