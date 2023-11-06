@@ -10,10 +10,20 @@ def login():
     user = data.get('user')
     password = data.get('password')
 
-    if database.verify_credentials(user, password):
-        return jsonify({"success": True})
-    else:
-        return jsonify({"success": False})
+    success = database.login_user(user, password)
+
+    return jsonify({"success": success})
+    
+@app.route('/logout', methods=['POST'])
+def logout():
+    data = request.get_json()
+    
+    user = data.get('user')
+
+    success = database.logout_user(user)
+
+    return jsonify({"success": success})
+
 
 @app.route('/signup', methods=['POST'])
 def signup():
@@ -22,10 +32,10 @@ def signup():
     user = data.get('user')
     password = data.get('password')
 
-    if database.create_user(user, password):
-        return jsonify({"success": True})
-    else:
-        return jsonify({"success": False})    
+    success = database.create_user(user, password)
+    
+    return jsonify({"success": success})
+
 
 # functions for project manager page
 app.route('/checkIn_hardware/<int:projectId>/<int:qty>', methods=['GET'])
