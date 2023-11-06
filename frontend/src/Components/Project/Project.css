@@ -1,90 +1,88 @@
 /* Project.css */
 .project-container {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 16px;
-    margin: 16px;
-    width: fit-content;
-    text-align: center;
-    background: #FDFDFD;
-  }
-  
-  .hardware-set {
-    margin-top: 16px;
-  }
-  
-  .hardware-set h3 {
-    font-size: 18px;
-    text-align: left;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  width: fit-content;
+  text-align: center;
+  background: #FDFDFD;
+}
 
-  }
-  
-  .hardware-values {
-    display: flex;
-    justify-content: space-between;
-    text-align: left;
-  }
-  
-  .hardware-values p {
-    margin: 0;
-  }
-  
-  .hardware-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .hardware-controls input {
-    width: 60px;
-    margin-right: 8px;
-  }
+.hardware-set {
+  margin-top: 16px;
+}
+
+.hardware-set h3 {
+  font-size: 18px;
+  text-align: left;
+}
+
+.hardware-values {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.hardware-values p {
+  margin: 0;
+}
+
+.hardware-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hardware-controls input {
+  width: 60px;
+  margin-right: 8px;
+}
 
 
 
 .label-value-box {
-    border: 1px solid #FF4E00;
-    border-radius: 8px;
-    padding: 16px;
-    margin: 8px;
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .label {
-    font-weight: bold;
-  }
-  
-  .value {
-    font-weight: normal;
-  }
+  border: 1px solid #FF4E00;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 8px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .hardware-set-box {
-    border: 1px solid #FF4E00;
-    border-radius: 8px;
-    padding: 16px;
-    margin: 16px;
-    text-align: center;
-    width: fit-content;
-    display: flex;
-    flex-direction: column;
-    background-color: #FDFDFD;
-  }
-  
-  .hardware-sets {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .button-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center
-  }
-  
-  /* Add additional styles as needed */
-  
+.label {
+  font-weight: bold;
+}
+
+.value {
+  font-weight: normal;
+}
+
+.hardware-set-box {
+  border: 1px solid #FF4E00;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  text-align: center;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  background-color: #FDFDFD;
+}
+
+.hardware-sets {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+}
+
+/* Add additional styles as needed */

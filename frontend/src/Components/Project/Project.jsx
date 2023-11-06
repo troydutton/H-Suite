@@ -25,28 +25,28 @@ class Project extends Component {
     const projectId = 1; // Replace with the actual project ID
     const qty = this.state[`inputValueCheckIn${hardwareSet}`]; // Use the check-in input value
 
-    fetch(`/checkIn_hardware/${projectId}/${qty}`)
-      .then((response) => response.json())
-      .then((data) => {
-        alert(data.message); // Display the response message in a popup
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    // fetch(`/checkIn_hardware/${projectId}/${qty}`)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     alert(data.message); // Display the response message in a popup
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error:', error);
+    //   });
   };
 
   handleCheckOut = (hardwareSet) => {
     const projectId = 1; // Replace with the actual project ID
     const qty = this.state[`inputValueCheckOut${hardwareSet}`]; // Use the check-out input value
 
-    fetch(`/checkOut_hardware/${projectId}/${qty}`)
-      .then((response) => response.json())
-      .then((data) => {
-        alert(data.message); // Display the response message in a popup
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    // fetch(`/checkOut_hardware/${projectId}/${qty}`)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     alert(data.message); // Display the response message in a popup
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error:', error);
+    //   });
   };
 
   // Function to toggle join/leave button and change color
@@ -54,6 +54,14 @@ class Project extends Component {
     this.setState((prevState) => ({
       isJoined: !prevState.isJoined,
     }));
+    // fetch(`/join_project/${this.props.project.projectId}`) // Replace with the actual project ID
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     alert(data.message); // Display the response message in a popup
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error:', error);
+    //   });
   };
 
   // Function to toggle authorized users dropdown
@@ -111,14 +119,12 @@ class Project extends Component {
               <input
                 type="number"
                 name="inputValueCheckIn"
-                value={this.state.inputValueCheckIn1}
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet1', 'inputValueCheckIn')}
               />
               <button onClick={() => this.handleCheckIn('hardwareSet1')}>Check In</button>
               <input
                 type="number"
                 name="inputValueCheckOut"
-                value={this.state.inputValueCheckOut1}
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet1', 'inputValueCheckOut')}
               />
               <button onClick={() => this.handleCheckOut('hardwareSet1')}>Check Out</button>
@@ -128,7 +134,7 @@ class Project extends Component {
             <h3>{hardwareName2}</h3>
             <div className="hardware-set">
               <div className="label-value-box">
-              <div className="value-box">
+                <div className="value-box">
                   <div className="label">Availability</div>
                   <div className="value">{`${availability2}/${totalCapacity2}`}</div>
                 </div>
@@ -142,14 +148,12 @@ class Project extends Component {
               <input
                 type="number"
                 name='inputValueCheckIn'
-                value={this.state.inputValueCheckIn2}
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet2', 'inputValueCheckIn')}
               />
               <button onClick={() => this.handleCheckIn('hardwareSet2')}>Check In</button>
               <input
                 type="number"
                 name="inputValueCheckOut"
-                value={this.state.inputValueCheckOut2}
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet2', 'inputValueCheckOut')}
               />
               <button onClick={() => this.handleCheckOut('hardwareSet2')}>Check Out</button>
