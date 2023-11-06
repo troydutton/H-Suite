@@ -55,8 +55,8 @@ function App() {
     <div>
       <ToastContainer />
       <Routes>
-        <Route path="/" element={<Login user = {user} setUser = {setUser} login = {login} />} />
-        <Route path="/dashboard" element={<Manager user = {user} projects = {projects}/>} />
+        <Route path="/" element={<Login user={user} setUser={setUser} login={login} />} />
+        <Route path="/dashboard" element={<Manager user={user} projects={projects} />} />
       </Routes>
     </div>
   );
