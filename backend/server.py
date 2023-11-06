@@ -38,6 +38,31 @@ def signup():
 
     return jsonify({"success": success})
 
+@app.route('/create-project', methods=['POST'])
+def create_project():
+    data = request.get_json()
+
+    project_name = data.get('projectName')
+    user = data.get('user')
+
+    success = database.create_project(project_name, user)
+    
+    return jsonify({"success": success})
+
+@app.route('/join-project', methods=['POST'])
+def join_project():
+    data = request.get_json()
+
+    try:
+        project_id = int(data.get('projectID'))
+        user = data.get('user')
+
+        success = database.add_user_to_project(project_id, user)
+    
+        return jsonify({"success": success})
+    except:
+        return jsonify({"success": False})
+
 
 # functions for project manager page
 app.route("/checkIn_hardware/<int:projectId>/<int:qty>", methods=["GET"])
