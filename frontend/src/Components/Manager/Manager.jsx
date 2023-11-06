@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Project from '../Project/Project';
 import './Manager.css';
 
-class Manager extends Component {
+export class Manager extends Component {
   // Sample project data, replace with your project data from MongoDB
   projects = [
     { id: 1, name: 'Project 1' },
