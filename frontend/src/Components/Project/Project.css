@@ -91,7 +91,7 @@
   align-items: center;
 }
 
-.check-Button{
+.check-Button {
   background-color: #fff;
   border-radius: 3px;
   border: 1px solid #ff4e00;
@@ -100,7 +100,7 @@
   padding: 2px 8px;
   cursor: pointer;
   transition: 0.3s;
-text-align: center;
+  text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -120,35 +120,16 @@ text-align: center;
 }
 
 .leave-button:hover {
-    background-color: rgba(23,26,32,1);
-    cursor: pointer;
-}
-.leave-button {
-    background-color: rgba(23,26,32,.8);
-    border: none;
-    border-radius: 6px;
-    color: #fff;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 15px;
-    height: 36px;
-    line-height: 20px;
-    min-width: 185px;
-    padding: 0 16px 0 16px;
-    color: #fff;
-    cursor: pointer;
-    align-items: center;
-}
-
-.join-button:hover {
-  background-color: rgba(23,26,32,1);
+  background-color: rgba(23, 26, 32, 1);
   cursor: pointer;
 }
-.join-button {
-  background-color: rgba(23,26,32,.8);
+
+.leave-button {
+  background-color: rgba(23, 26, 32, .8);
   border: none;
   border-radius: 6px;
   color: #fff;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 15px;
   height: 36px;
   line-height: 20px;
@@ -159,12 +140,33 @@ text-align: center;
   align-items: center;
 }
 
-.authorizedUsers-button{
-  background-color: rgba(23,26,32,.8);
+.join-button:hover {
+  background-color: rgba(23, 26, 32, 1);
+  cursor: pointer;
+}
+
+.join-button {
+  background-color: rgba(23, 26, 32, .8);
   border: none;
   border-radius: 6px;
   color: #fff;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  height: 36px;
+  line-height: 20px;
+  min-width: 185px;
+  padding: 0 16px 0 16px;
+  color: #fff;
+  cursor: pointer;
+  align-items: center;
+}
+
+.authorizedUsers-button {
+  background-color: rgba(23, 26, 32, .8);
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 15px;
   height: 36px;
   line-height: 20px;
@@ -176,7 +178,7 @@ text-align: center;
 }
 
 .authorizedUsers-button:hover {
-  background-color: rgba(23,26,32,1);
+  background-color: rgba(23, 26, 32, 1);
   cursor: pointer;
 }
 

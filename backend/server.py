@@ -3,69 +3,77 @@ import database
 
 app = Flask(__name__)
 
-@app.route('/login', methods=['POST'])
+
+@app.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
-    
-    user = data.get('user')
-    password = data.get('password')
+
+    user = data.get("user")
+    password = data.get("password")
 
     success = database.login_user(user, password)
 
     return jsonify({"success": success})
-    
-@app.route('/logout', methods=['POST'])
+
+
+@app.route("/logout", methods=["POST"])
 def logout():
     data = request.get_json()
-    
-    user = data.get('user')
+
+    user = data.get("user")
 
     success = database.logout_user(user)
 
     return jsonify({"success": success})
 
 
-@app.route('/signup', methods=['POST'])
+@app.route("/signup", methods=["POST"])
 def signup():
     data = request.get_json()
-    
-    user = data.get('user')
-    password = data.get('password')
+
+    user = data.get("user")
+    password = data.get("password")
 
     success = database.create_user(user, password)
-    
+
     return jsonify({"success": success})
 
 
 # functions for project manager page
-app.route('/checkIn_hardware/<int:projectId>/<int:qty>', methods=['GET'])
+app.route("/checkIn_hardware/<int:projectId>/<int:qty>", methods=["GET"])
+
+
 def checkIn_hardware(projectId, qty):
     # Perform operations like decrementing available hardware quantity
     # and interacting with MongoDB if needed.
     return jsonify({"message": f"{qty} hardware checked in"})
 
-@app.route('/checkOut_hardware/<int:projectId>/<int:qty>', methods=['GET'])
+
+@app.route("/checkOut_hardware/<int:projectId>/<int:qty>", methods=["GET"])
 def checkOut_hardware(projectId, qty):
     # Perform operations like decrementing available hardware quantity
     # and interacting with MongoDB if needed.
     return jsonify({"message": f"{qty} hardware checked out"})
 
-@app.route('/joinProject/<int:projectId>', methods=['GET'])
+
+@app.route("/joinProject/<int:projectId>", methods=["GET"])
 def joinProject(projectId):
     # Perform operations like checking if the user is authorized to join
     # and interacting with MongoDB if needed.
     return jsonify({"message": f"Joined Project {projectId}"})
 
-@app.route('/leaveProject/<int:projectId>', methods=['GET'])
+
+@app.route("/leaveProject/<int:projectId>", methods=["GET"])
 def leaveProject(projectId):
     # Perform operations like checking if the user has joined the project
     # and interacting with MongoDB if needed.
     return jsonify({"message": f"Left Project {projectId}"})
 
-@app.route('/getProjects', methods=['PUT'])
+
+@app.route("/getProjects", methods=["PUT"])
 def get_projects():
     data = request.get_json()
-    user = data.get('user')
+    user = data.get("user")
 
     print(user)
     user_id = database.get_user_id(user)
@@ -75,6 +83,7 @@ def get_projects():
     print(projects)
 
     return jsonify({"projects": projects, "success": True})
+
 
 if __name__ == "__main__":
     database.initialize_database()

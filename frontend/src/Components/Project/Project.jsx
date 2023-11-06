@@ -11,7 +11,7 @@ class Project extends Component {
       inputValueCheckIn2: 0, // Update state property for check-in input
       inputValueCheckOut2: 0, // Update state property for check-out input
       showAuthorizedUsers: false, // Added state for dropdown
-      isJoined: false, // Added state for join/leave button
+      isJoined: true, // Added state for join/leave button
     };
   }
 
