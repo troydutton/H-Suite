@@ -18,8 +18,6 @@ export const Manager = ({ user, projects }) => {
       })
     });
 
-    const data = await response.json();
-
     navigate('/');
   }
 

@@ -1,0 +1,35 @@
+.menu-container {
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: -webkit-linear-gradient(#EC9F05, #FF4E00);
+    text-align: center;
+    /* align-items: center; */
+    justify-content: center;
+    /* Fallback for older browsers */
+    background: linear-gradient(#EC9F05, #FF4E00);
+    min-height: 100vh;
+}
+
+.BUTTON {
+    font-family: Roboto, sans-serif;
+    font-weight: 0;
+    font-size: 14px;
+    color: #000000;
+    background-color: #ffffff00;
+    padding: 10px 30px;
+    border: solid #ff4e00 2px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    border-radius: 50px;
+    transition: 965ms;
+    transform: translateY(0);
+    cursor: pointer;
+    margin:20px;
+  }
+  
+  .BUTTON:hover {
+    transform: scale(1.2);
+    transition: 965ms;
+    background-color: #fff;
+    color: #edb69f;
+    border: solid 2px #edb69f;
+  }
