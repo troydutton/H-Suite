@@ -79,10 +79,106 @@
   justify-content: space-between;
 }
 
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  margin: 8px;
+}
+
+.hardware-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.check-Button{
+  background-color: #fff;
+  border-radius: 3px;
+  border: 1px solid #ff4e00;
+  color: #ff4e00;
+  font-size: 13px;
+  padding: 2px 8px;
+  cursor: pointer;
+  transition: 0.3s;
+text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.check-Button:hover {
+  background-color: #fff;
+  color: #000000;
+  border-color: #000000;
+  transition: 0.3s;
+}
+
+
+
 .button-row {
   display: flex;
   justify-content: space-between;
   align-items: center
 }
+
+.leave-button:hover {
+    background-color: rgba(23,26,32,1);
+    cursor: pointer;
+}
+.leave-button {
+    background-color: rgba(23,26,32,.8);
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    height: 36px;
+    line-height: 20px;
+    min-width: 185px;
+    padding: 0 16px 0 16px;
+    color: #fff;
+    cursor: pointer;
+    align-items: center;
+}
+
+.join-button:hover {
+  background-color: rgba(23,26,32,1);
+  cursor: pointer;
+}
+.join-button {
+  background-color: rgba(23,26,32,.8);
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  height: 36px;
+  line-height: 20px;
+  min-width: 185px;
+  padding: 0 16px 0 16px;
+  color: #fff;
+  cursor: pointer;
+  align-items: center;
+}
+
+.authorizedUsers-button{
+  background-color: rgba(23,26,32,.8);
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  height: 36px;
+  line-height: 20px;
+  min-width: 185px;
+  padding: 0 16px 0 16px;
+  color: #fff;
+  cursor: pointer;
+  align-items: center;
+}
+
+.authorizedUsers-button:hover {
+  background-color: rgba(23,26,32,1);
+  cursor: pointer;
+}
+
 
 /* Add additional styles as needed */

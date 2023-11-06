@@ -117,17 +117,18 @@ class Project extends Component {
             </div>
             <div className="hardware-controls">
               <input
+                className='inputBox'
                 type="number"
                 name="inputValueCheckIn"
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet1', 'inputValueCheckIn')}
               />
-              <button onClick={() => this.handleCheckIn('hardwareSet1')}>Check In</button>
+              <button className="check-Button" onClick={() => this.handleCheckIn('hardwareSet1')}>Check In</button>
               <input
                 type="number"
                 name="inputValueCheckOut"
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet1', 'inputValueCheckOut')}
               />
-              <button onClick={() => this.handleCheckOut('hardwareSet1')}>Check Out</button>
+              <button className="check-Button" onClick={() => this.handleCheckOut('hardwareSet1')}>Check Out</button>
             </div>
           </div>
           <div className="hardware-set-box">
@@ -150,13 +151,13 @@ class Project extends Component {
                 name='inputValueCheckIn'
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet2', 'inputValueCheckIn')}
               />
-              <button onClick={() => this.handleCheckIn('hardwareSet2')}>Check In</button>
+              <button className="check-Button" onClick={() => this.handleCheckIn('hardwareSet2')}>Check In</button>
               <input
                 type="number"
                 name="inputValueCheckOut"
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet2', 'inputValueCheckOut')}
               />
-              <button onClick={() => this.handleCheckOut('hardwareSet2')}>Check Out</button>
+              <button className="check-Button" onClick={() => this.handleCheckOut('hardwareSet2')}>Check Out</button>
             </div>
           </div>
         </div>
@@ -167,7 +168,7 @@ class Project extends Component {
           >
             {this.state.isJoined ? 'Leave Project' : 'Join Project'}
           </button>
-          <button onClick={this.handleToggleAuthorizedUsers}>Authorized Users</button>
+          <button className="authorizedUsers-button" onClick={this.handleToggleAuthorizedUsers}>Authorized Users</button>
           {this.state.showAuthorizedUsers && (
             <div className="authorized-users-dropdown">
               <ul>
