@@ -7,34 +7,31 @@ app = Flask(__name__)
 def login():
     data = request.get_json()
     
-    userid = data.get('userid')
     user = data.get('user')
     password = data.get('password')
 
-    if userid == None or user == None or password == None:
-        return "False"
-
-    if database.verify_credentials(int(userid), user, password):
-        return "True"
+    if database.verify_credentials(user, password):
+        return jsonify({"success": True})
     else:
-        return "False"
+        return jsonify({"success": False})
 
 @app.route('/signup', methods=['POST'])
 def signup():
     data = request.get_json()
     
-    userid = data.get('userid')
     user = data.get('user')
     password = data.get('password')
 
-    if userid == None or user == None or password == None:
+    if user == None or password == None:
         return "False"
 
-    if database.create_user(int(userid), user, password):
+    if database.create_user(user, password):
         return "True"
     else:
         return "False"
 
 
 if __name__ == "__main__":
+    database.initialize_database()
     app.run(debug=True)
+    database.end_database()
