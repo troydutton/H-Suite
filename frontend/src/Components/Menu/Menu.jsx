@@ -1,11 +1,11 @@
-import './NewButton.css'
+import './Menu.css'
 
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const NewButton = ({user, getProjects}) => {
+export const Menu = ({user, getProjects}) => {
     const navigate = useNavigate();
 
     const create_project = async () => {
@@ -62,13 +62,13 @@ export const NewButton = ({user, getProjects}) => {
     return (
         <div className='menu-container'>
             <div>
-                <button className="BUTTON" onClick={create_project}> Create Project </button>
+                <button className="menu-button" onClick={create_project}> Create Project </button>
             </div>
             <div>
-                <button className="BUTTON" onClick={join_project}> Join Project </button>
+                <button className="menu-button" onClick={join_project}> Join Project </button>
             </div>
             <div>
-                <button className="BUTTON" onClick={view_projects}> View Projects </button>
+                <button className="menu-button" onClick={view_projects}> View Projects </button>
             </div>
         </div>
   )

@@ -28,7 +28,7 @@ export const Login = ({user, setUser, login}) => {
       const data = await response.json();
 
       if (data.success) {
-        navigate('/new-button');
+        navigate('/menu');
       } else {
         toast.warning("Unable to create account.");
       }

@@ -120,6 +120,10 @@ def add_user_to_project(projectid: int, username: str) -> bool:
     # Verify project exists
     if projects.find_one({"id": projectid}) == None:
         return False
+    
+    # Verify user is not already in project
+    if username in projects.find_one({"id": projectid})["users"]:
+        return False
 
     # Add user to project
     projects.update_one({"id": projectid}, {"$push": {"users": username}})
