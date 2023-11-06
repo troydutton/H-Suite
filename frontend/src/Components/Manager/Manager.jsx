@@ -23,7 +23,7 @@ export const Manager = ({ user, projects }) => {
 
   return (
     <div className="manager-container">
-      <button className="logout-button" onClick={logout}>
+      <button className="logout-button" onClick={() => navigate("/menu")}>
         Menu
       </button>
       <button className="logout-button" onClick={logout}>

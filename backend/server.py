@@ -53,21 +53,19 @@ def create_project():
 def join_project():
     data = request.get_json()
 
-    try:
-        project_id = int(data.get('projectID'))
-        user = data.get('user')
+    project_id = data.get('projectID')
+    user = data.get('user')
 
-        success = database.add_user_to_project(project_id, user)
-    
-        return jsonify({"success": success})
-    except:
+    if project_id == None or user == None:
         return jsonify({"success": False})
+
+    success = database.add_user_to_project(int(project_id), user)
+
+    return jsonify({"success": success})
 
 
 # functions for project manager page
 app.route("/checkIn_hardware/<int:projectId>/<int:qty>", methods=["GET"])
-
-
 def checkIn_hardware(projectId, qty):
     # Perform operations like decrementing available hardware quantity
     # and interacting with MongoDB if needed.

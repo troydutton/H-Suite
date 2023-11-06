@@ -10,7 +10,7 @@
     min-height: 100vh;
 }
 
-.BUTTON {
+.menu-button {
     font-family: Roboto, sans-serif;
     font-weight: 0;
     font-size: 14px;
@@ -26,7 +26,7 @@
     margin:20px;
   }
   
-  .BUTTON:hover {
+  .menu-button:hover {
     transform: scale(1.2);
     transition: 965ms;
     background-color: #fff;
