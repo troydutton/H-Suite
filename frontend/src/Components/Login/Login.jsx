@@ -8,10 +8,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import user_icon from '../Assets/person.png'
 import password_icon from '../Assets/password.png'
 
+export const [user, setUser] = useState(null);
+
 export const Login = () => {
     const navigate = useNavigate();
 
-    const [user, setUser] = useState(null);
     const [password, setPassword] = useState(null);
 
     const login = async () => {

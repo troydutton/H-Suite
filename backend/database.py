@@ -41,7 +41,7 @@ def create_user(username: str, password: str) -> bool:
     
     return True
 
-def verify_credentials(username: str, password: str) -> bool:
+def login_user(username: str, password: str) -> bool:
     if username == None or password == None:
         return False
     
@@ -52,6 +52,19 @@ def verify_credentials(username: str, password: str) -> bool:
         return False
 
     users.update_one({"id": user["id"]}, {"$set": {"active": True}})
+    return True
+
+def logout_user(username: str) -> bool:
+    if username == None:
+        return False
+    
+    # Verify user exists
+    if users.find_one({"username": username}) == None:
+        return False
+    
+    # Set user to inactive
+    users.update_one({"username": username}, {"$set": {"active": False}})
+    
     return True
 
 def generate_projectid() -> int:
