@@ -62,6 +62,20 @@ def leaveProject(projectId):
     # and interacting with MongoDB if needed.
     return jsonify({"message": f"Left Project {projectId}"})
 
+@app.route('/getProjects', methods=['PUT'])
+def get_projects():
+    data = request.get_json()
+    user = data.get('user')
+
+    print(user)
+    user_id = database.get_user_id(user)
+
+    projects = database.get_projects(user_id)
+
+    print(projects)
+
+    return jsonify({"projects": projects, "success": True})
+
 if __name__ == "__main__":
     database.initialize_database()
     app.run(debug=True)
