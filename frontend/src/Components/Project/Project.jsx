@@ -11,18 +11,19 @@ class Project extends Component {
       inputValueCheckIn2: 0, // Update state property for check-in input
       inputValueCheckOut2: 0, // Update state property for check-out input
       showAuthorizedUsers: false, // Added state for dropdown
+      isJoined: false, // Added state for join/leave button
     };
   }
 
   handleInputChange = (e, hardwareSet, inputType) => {
     this.setState({
-      [hardwareSet]: { ...this.state[hardwareSet], [inputType]: parseInt(e.target.value) },
+      [`${inputType}${hardwareSet}`]: parseInt(e.target.value),
     });
   };
 
   handleCheckIn = (hardwareSet) => {
     const projectId = 1; // Replace with the actual project ID
-    const qty = this.state[hardwareSet].inputValueCheckIn; // Use the check-in input value
+    const qty = this.state[`inputValueCheckIn${hardwareSet}`]; // Use the check-in input value
 
     fetch(`/checkIn_hardware/${projectId}/${qty}`)
       .then((response) => response.json())
@@ -36,7 +37,7 @@ class Project extends Component {
 
   handleCheckOut = (hardwareSet) => {
     const projectId = 1; // Replace with the actual project ID
-    const qty = this.state[hardwareSet].inputValueCheckOut; // Use the check-out input value
+    const qty = this.state[`inputValueCheckOut${hardwareSet}`]; // Use the check-out input value
 
     fetch(`/checkOut_hardware/${projectId}/${qty}`)
       .then((response) => response.json())
@@ -70,21 +71,22 @@ class Project extends Component {
     const {
       projectId,
       projectName,
-      isJoined,
       authorizedUsers,
       hardwareSets,
     } = project; // Access props passed from Manager component
 
     const {
       hardwareName: hardwareName1,
-      checkedOut: checkedOut1,
       totalCapacity: totalCapacity1,
+      availability: availability1,
+      checkedOut: checkedOut1,
     } = hardwareSets[0];
 
     const {
       hardwareName: hardwareName2,
-      checkedOut: checkedOut2,
       totalCapacity: totalCapacity2,
+      availability: availability2,
+      checkedOut: checkedOut2,
     } = hardwareSets[1];
 
     return (
@@ -95,8 +97,14 @@ class Project extends Component {
             <h3>{hardwareName1}</h3>
             <div className="hardware-set">
               <div className="label-value-box">
-                <div className="label">Availability</div>
-                <div className="value">{`${checkedOut1}/${totalCapacity1}`}</div>
+                <div className="value-box">
+                  <div className="label">Availability</div>
+                  <div className="value">{`${availability1}/${totalCapacity1}`}</div>
+                </div>
+                <div className="value-box">
+                  <div className="label">Checked Out</div>
+                  <div className="value">{checkedOut1}</div>
+                </div>
               </div>
             </div>
             <div className="hardware-controls">
@@ -120,8 +128,14 @@ class Project extends Component {
             <h3>{hardwareName2}</h3>
             <div className="hardware-set">
               <div className="label-value-box">
-                <div className="label">Availability</div>
-                <div className="value">{`${checkedOut2}/${totalCapacity2}`}</div>
+              <div className="value-box">
+                  <div className="label">Availability</div>
+                  <div className="value">{`${availability2}/${totalCapacity2}`}</div>
+                </div>
+                <div className="value-box">
+                  <div className="label">Checked Out</div>
+                  <div className="value">{checkedOut2}</div>
+                </div>
               </div>
             </div>
             <div className="hardware-controls">
@@ -144,10 +158,10 @@ class Project extends Component {
         </div>
         <div className="button-row">
           <button
-            className={isJoined ? 'leave-button' : 'join-button'} // Dynamically change button color
+            className={this.state.isJoined ? 'leave-button' : 'join-button'} // Dynamically change button color
             onClick={this.handleToggleJoinLeave}
           >
-            {isJoined ? 'Leave Project' : 'Join Project'}
+            {this.state.isJoined ? 'Leave Project' : 'Join Project'}
           </button>
           <button onClick={this.handleToggleAuthorizedUsers}>Authorized Users</button>
           {this.state.showAuthorizedUsers && (

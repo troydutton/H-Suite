@@ -9,17 +9,18 @@ export class Manager extends Component {
     {
       projectId: 1,
       projectName: 'Sample Project 1',
-      isJoined: false,
       authorizedUsers: ['Dumb Troy', 'Happy Haakon', 'BOOP'], // Example authorized users
       hardwareSets: [
         {
           hardwareName: "Drill Troy",
           totalCapacity: 50,
+          availability: 40,
           checkedOut: 10,
         },
         {
           hardwareName: "Hammer Haakon",
           totalCapacity: 30,
+          availability: 15,
           checkedOut: 15,
         },
       ],
@@ -27,17 +28,18 @@ export class Manager extends Component {
     {
       projectId: 2,
       projectName: 'Sample Project 2',
-      isJoined: false,
       authorizedUsers: ['Dumb Troy', 'Happy Haakon', 'BOOP'], // Example authorized users
       hardwareSets: [
         {
           hardwareName: "Toy Troy",
           totalCapacity: 50,
+          availability: 40,
           checkedOut: 10,
         },
         {
           hardwareName: "Humping Haakon",
           totalCapacity: 30,
+          availability: 15,
           checkedOut: 15,
         },
       ],

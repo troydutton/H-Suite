@@ -47,9 +47,12 @@
 .label-value-box {
     border: 1px solid #FF4E00;
     border-radius: 8px;
-    padding: 8px;
+    padding: 16px;
     margin: 8px;
     text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   
   .label {
