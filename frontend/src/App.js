@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { Login } from './Components/Login/Login';
 import { Manager } from './Components/Manager/Manager';
+import { NewButton } from './Components/NewButton/NewButton';
 
 function App() {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ function App() {
 
     if (data.success) {
       getProjects();
-      navigate('/dashboard');
+      navigate('/new-button');
     } else {
       toast.error("Invalid credentials.");
     }
@@ -55,8 +56,9 @@ function App() {
     <div>
       <ToastContainer />
       <Routes>
-        <Route path="/" element={<Login user={user} setUser={setUser} login={login} />} />
-        <Route path="/dashboard" element={<Manager user={user} projects={projects} />} />
+        <Route path="/" element={<Login user = {user} setUser = {setUser} login = {login} />} />
+        <Route path="/projects" element={<Manager user = {user} projects = {projects}/>} />
+        <Route path="/new-button" element={<NewButton user = {user} getProjects = {getProjects}/>} />
       </Routes>
     </div>
   );
