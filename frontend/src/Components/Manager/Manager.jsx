@@ -49,6 +49,9 @@ export class Manager extends Component {
   render() {
     return (
       <div className="manager-container">
+        <button className="logout-button" onClick={this.handleLogout}>
+          Logout
+        </button>
         <h1>Project Manager</h1>
         <div className="project-grid">
           {this.projects.map((project) => (
