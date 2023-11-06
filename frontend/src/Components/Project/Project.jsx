@@ -3,57 +3,50 @@ import React, { Component } from 'react';
 import './Project.css';
 
 class Project extends Component {
-  state = {
-    projectName: 'Sample Project',
-    hardwareSet1: {
-      totalCapacity: 50,
-      checkedOut: 10,
-      inputValueCheckIn: 0, // Update state property for check-in input
-      inputValueCheckOut: 0, // Update state property for check-out input
-    },
-    hardwareSet2: {
-      totalCapacity: 30,
-      checkedOut: 5,
-      inputValueCheckIn: 0, // Update state property for check-in input
-      inputValueCheckOut: 0, // Update state property for check-out input
-    },
-    isJoined: false, // Added state for button state
-    showAuthorizedUsers: false, // Added state for dropdown visibility
-    authorizedUsers: ['User 1', 'User 2', 'User 3'], // Example authorized users
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValueCheckIn1: 0, // Update state property for check-in input
+      inputValueCheckOut1: 0, // Update state property for check-out input
+      inputValueCheckIn2: 0, // Update state property for check-in input
+      inputValueCheckOut2: 0, // Update state property for check-out input
+      showAuthorizedUsers: false, // Added state for dropdown
+      isJoined: false, // Added state for join/leave button
+    };
+  }
 
   handleInputChange = (e, hardwareSet, inputType) => {
     this.setState({
-      [hardwareSet]: { ...this.state[hardwareSet], [inputType]: parseInt(e.target.value) },
+      [`${inputType}${hardwareSet}`]: parseInt(e.target.value),
     });
   };
 
   handleCheckIn = (hardwareSet) => {
     const projectId = 1; // Replace with the actual project ID
-    const qty = this.state[hardwareSet].inputValueCheckIn; // Use the check-in input value
+    const qty = this.state[`inputValueCheckIn${hardwareSet}`]; // Use the check-in input value
 
-    fetch(`/checkIn_hardware/${projectId}/${qty}`)
-      .then((response) => response.json())
-      .then((data) => {
-        alert(data.message); // Display the response message in a popup
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    // fetch(`/checkIn_hardware/${projectId}/${qty}`)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     alert(data.message); // Display the response message in a popup
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error:', error);
+    //   });
   };
 
   handleCheckOut = (hardwareSet) => {
     const projectId = 1; // Replace with the actual project ID
-    const qty = this.state[hardwareSet].inputValueCheckOut; // Use the check-out input value
+    const qty = this.state[`inputValueCheckOut${hardwareSet}`]; // Use the check-out input value
 
-    fetch(`/checkOut_hardware/${projectId}/${qty}`)
-      .then((response) => response.json())
-      .then((data) => {
-        alert(data.message); // Display the response message in a popup
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    // fetch(`/checkOut_hardware/${projectId}/${qty}`)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     alert(data.message); // Display the response message in a popup
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error:', error);
+    //   });
   };
 
   // Function to toggle join/leave button and change color
@@ -61,6 +54,14 @@ class Project extends Component {
     this.setState((prevState) => ({
       isJoined: !prevState.isJoined,
     }));
+    // fetch(`/join_project/${this.props.project.projectId}`) // Replace with the actual project ID
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     alert(data.message); // Display the response message in a popup
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error:', error);
+    //   });
   };
 
   // Function to toggle authorized users dropdown
@@ -71,74 +72,103 @@ class Project extends Component {
   };
 
   render() {
-    const { projectName, isJoined, showAuthorizedUsers, authorizedUsers } = this.state;
-    const {inputValueCheckIn: inputValueCheckIn1, inputValueCheckOut: inputValueCheckOut1, checkedOut: checkedOut1, totalCapacity: totalCapacity1} = this.state.hardwareSet1;
-    const {inputValueCheckIn: inputValueCheckIn2, inputValueCheckOut: inputValueCheckOut2, checkedOut: checkedOut2, totalCapacity: totalCapacity2} = this.state.hardwareSet2;
+    const {
+      project
+    } = this.props;
+
+    const {
+      projectId,
+      projectName,
+      authorizedUsers,
+      hardwareSets,
+    } = project; // Access props passed from Manager component
+
+    const {
+      hardwareName: hardwareName1,
+      totalCapacity: totalCapacity1,
+      availability: availability1,
+      checkedOut: checkedOut1,
+    } = hardwareSets[0];
+
+    const {
+      hardwareName: hardwareName2,
+      totalCapacity: totalCapacity2,
+      availability: availability2,
+      checkedOut: checkedOut2,
+    } = hardwareSets[1];
 
     return (
       <div className="project-container">
         <h2>{projectName}</h2>
         <div className="hardware-sets">
           <div className="hardware-set-box">
-            <h3>Hardware Set 1</h3>
+            <h3>{hardwareName1}</h3>
             <div className="hardware-set">
               <div className="label-value-box">
-                <div className="label">Availability</div>
-                <div className="value">{`${checkedOut1}/${totalCapacity1}`}</div>
+                <div className="value-box">
+                  <div className="label">Availability</div>
+                  <div className="value">{`${availability1}/${totalCapacity1}`}</div>
+                </div>
+                <div className="value-box">
+                  <div className="label">Checked Out</div>
+                  <div className="value">{checkedOut1}</div>
+                </div>
               </div>
             </div>
             <div className="hardware-controls">
               <input
                 type="number"
                 name="inputValueCheckIn"
-                value={inputValueCheckIn1}
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet1', 'inputValueCheckIn')}
               />
               <button onClick={() => this.handleCheckIn('hardwareSet1')}>Check In</button>
               <input
                 type="number"
                 name="inputValueCheckOut"
-                value={inputValueCheckOut1}
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet1', 'inputValueCheckOut')}
               />
-              <button onClick={() => this.handleCheckOut('hardwareSet1')}>Check Out</button>           
+              <button onClick={() => this.handleCheckOut('hardwareSet1')}>Check Out</button>
             </div>
           </div>
           <div className="hardware-set-box">
-            <h3>Hardware Set 2</h3>
+            <h3>{hardwareName2}</h3>
             <div className="hardware-set">
               <div className="label-value-box">
-                <div className="label">Availability</div>
-                <div className="value">{`${checkedOut2}/${totalCapacity2}`}</div>
+                <div className="value-box">
+                  <div className="label">Availability</div>
+                  <div className="value">{`${availability2}/${totalCapacity2}`}</div>
+                </div>
+                <div className="value-box">
+                  <div className="label">Checked Out</div>
+                  <div className="value">{checkedOut2}</div>
+                </div>
               </div>
             </div>
             <div className="hardware-controls">
               <input
                 type="number"
                 name='inputValueCheckIn'
-                value={inputValueCheckIn2}
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet2', 'inputValueCheckIn')}
               />
               <button onClick={() => this.handleCheckIn('hardwareSet2')}>Check In</button>
               <input
                 type="number"
                 name="inputValueCheckOut"
-                value={inputValueCheckOut2}
                 onChange={(e) => this.handleInputChange(e, 'hardwareSet2', 'inputValueCheckOut')}
               />
-              <button onClick={() => this.handleCheckOut('hardwareSet2')}>Check Out</button>            
+              <button onClick={() => this.handleCheckOut('hardwareSet2')}>Check Out</button>
             </div>
           </div>
         </div>
         <div className="button-row">
           <button
-            className={isJoined ? 'leave-button' : 'join-button'} // Dynamically change button color
+            className={this.state.isJoined ? 'leave-button' : 'join-button'} // Dynamically change button color
             onClick={this.handleToggleJoinLeave}
           >
-            {isJoined ? 'Leave Project' : 'Join Project'}
+            {this.state.isJoined ? 'Leave Project' : 'Join Project'}
           </button>
           <button onClick={this.handleToggleAuthorizedUsers}>Authorized Users</button>
-          {showAuthorizedUsers && (
+          {this.state.showAuthorizedUsers && (
             <div className="authorized-users-dropdown">
               <ul>
                 {authorizedUsers.map((user, index) => (
