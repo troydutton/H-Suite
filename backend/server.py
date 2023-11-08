@@ -63,6 +63,20 @@ def join_project():
 
     return jsonify({"success": success})
 
+@app.route('/leave-project', methods=['POST'])
+def remove_project():
+    data = request.get_json()
+
+    project_id = data.get('projectID')
+    user = data.get('user')
+
+    if project_id == None or user == None:
+        return jsonify({"success": False})
+
+    success = database.remove_user_from_project(int(project_id), user)
+    
+    return jsonify({"success": success})
+
 
 # functions for project manager page
 app.route("/checkIn_hardware/<int:projectId>/<int:qty>", methods=["GET"])

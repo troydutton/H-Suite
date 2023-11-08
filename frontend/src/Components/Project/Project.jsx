@@ -1,6 +1,9 @@
 // Project.jsx
 import React, { Component } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import './Project.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 class Project extends Component {
   constructor(props) {
@@ -97,8 +100,37 @@ class Project extends Component {
       checkedOut: checkedOut2,
     } = hardwareSets[1];
 
+    const leave_project = async () => {
+      const projectID = project.projectId;
+      const user = this.props.user;
+      const response = await fetch('/leave-project', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        
+        body: JSON.stringify({
+            projectID: projectID,
+            user: user
+            
+        })
+      }); 
+      const data = await response.json();
+
+      if (data.success) {
+        toast.success("Left project.");
+        this.setState({
+            isJoined: false
+        });
+      } else {
+        toast.warning("Can't leave project.");
+      }
+    }
+
     return (
-      <div className="project-container">
+      <div>
+      {this.state.isJoined ? 
+        <div className="project-container" >
         <h2>{`${projectName} (${projectId})`}</h2>
         <div className="hardware-sets">
           <div className="hardware-set-box">
@@ -168,7 +200,7 @@ class Project extends Component {
         <div className="button-row">
           <button
             className={this.state.isJoined ? 'leave-button' : 'join-button'} // Dynamically change button color
-            onClick={this.handleToggleJoinLeave}
+            onClick={this.handleToggleJoinLeave && leave_project}
           >
             {this.state.isJoined ? 'Leave Project' : 'Join Project'}
           </button>
@@ -183,6 +215,10 @@ class Project extends Component {
             </div>
           )}
         </div>
+        </div>
+      :
+       null}
+      
       </div>
     );
   }
