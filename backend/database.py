@@ -101,7 +101,7 @@ def create_project(projectname: str, username: str) -> bool:
         return False
 
     # Verify projectname is not already taken
-    if projects.find_one({"projectname": projectname}) != None:
+    if projects.find_one({"project_name": projectname}) != None:
         return False
 
     # Add project
