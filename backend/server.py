@@ -101,6 +101,20 @@ def checkout():
     else:
         return jsonify({"success": False})
 
+@app.route('/leave-project', methods=['POST'])
+def remove_project():
+    data = request.get_json()
+
+    project_id = data.get('projectID')
+    user = data.get('user')
+    print(f"project_id: {project_id}, user: {user}")
+
+    if project_id == None or user == None:
+        return jsonify({"success": False})
+
+    success = database.remove_user_from_project(int(project_id), user)
+
+    return jsonify({"success": success})
 
 @app.route('/checkin', methods=['PUT'])
 def checkin():
