@@ -1,5 +1,6 @@
 // Project.jsx
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import './Project.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,45 +24,61 @@ const Project = ({cur_user, project: initialProject}) => {
   const [availability1, setAvailability1] = useState(initialAvailability1);
   const [availability2, setAvailability2] = useState(initialAvailability2);
 
-  const handleCheckOut1 = async () => {
-    const response = await fetch('/checkout1', {
+  const handleCheckOut = async (hardware_index) => {
+    const response = await fetch('/checkout', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         projectId: projectId,
-        qty: inputValueCheckOut1,
-        project: project
+        project: project,
+        qty: hardware_index ? inputValueCheckOut2 : inputValueCheckOut1,
+        hardware_index: hardware_index
       })
     });
 
     const data = await response.json();
 
     if (data.success) {
+      toast.success("Checked out hardware.");
       setProject(data.project);
-      setAvailability1(data.availability);
+      if (hardware_index == 0) {
+        setAvailability1(data.availability);
+      } else {
+        setAvailability2(data.availability);
+      }
+    } else {
+      toast.error("Unable to check out hardware.");
     }
-
   };
 
-  const handleCheckIn1 = async () => {
-    const response = await fetch('/checkin1', {
+  const handleCheckIn = async (hardware_index) => {
+    const response = await fetch('/checkin', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         projectId: projectId,
-        qty: inputValueCheckIn1,
-        project: project
+        project: project,
+        qty: hardware_index ? inputValueCheckIn2 : inputValueCheckIn1,
+        hardware_index: hardware_index
       })
     });
+
     const data = await response.json();
 
     if (data.success) {
       setProject(data.project);
-      setAvailability1(data.availability);
+      if (hardware_index == 0) {
+        setAvailability1(data.availability);
+      } else {
+        setAvailability2(data.availability);
+      }
+      toast.success("Checked in hardware.");
+    } else {
+      toast.error("Unable to check in hardware.");
     }
   };
 
@@ -126,13 +143,13 @@ const Project = ({cur_user, project: initialProject}) => {
               name="inputValueCheckIn"
               onChange={(e) => setInputValueCheckIn1(e.target.value)}
             />
-            <button className="check-Button" onClick={() => handleCheckIn1('hardwareSet1')}>Check In</button>
+            <button className="check-Button" onClick={() => handleCheckIn(0)}>Check In</button>
             <input
               type="number"
               name="inputValueCheckOut"
               onChange={(e) => setInputValueCheckOut1(e.target.value)}
             />
-            <button className="check-Button" onClick={() => handleCheckOut1('hardwareSet1')}>Check Out</button>
+            <button className="check-Button" onClick={() => handleCheckOut(0)}>Check Out</button>
           </div>
         </div>
         <div className="hardware-set-box">
@@ -155,13 +172,13 @@ const Project = ({cur_user, project: initialProject}) => {
               name='inputValueCheckIn'
               onChange={(e) => setInputValueCheckIn2(e.target.value)}
             />
-            <button className="check-Button" onClick={() => handleCheckIn1('hardwareSet2')}>Check In</button>
+            <button className="check-Button" onClick={() => handleCheckIn(1)}>Check In</button>
             <input
               type="number"
               name="inputValueCheckOut"
               onChange={(e) => setInputValueCheckOut2(e.target.value)}
             />
-            <button className="check-Button" onClick={() => handleCheckOut1('hardwareSet2')}>Check Out</button>
+            <button className="check-Button" onClick={() => handleCheckOut(1)}>Check Out</button>
           </div>
         </div>
       </div>
@@ -169,10 +186,9 @@ const Project = ({cur_user, project: initialProject}) => {
         <button
           className={isJoined ? 'leave-button' : 'join-button'} // Dynamically change button color
           onClick={handleToggleJoinLeave && leave_project }
-        >
           {isJoined ? 'Leave Project' : 'Join Project'}
         </button>
-        <button className="authorizedUsers-button" onClick={handleToggleAuthorizedUsers}>Authorized Users</button>
+        <button className="authorizedUsers-button">Authorized Users</button>
         {showAuthorizedUsers && (
           <div className="authorized-users-dropdown">
             <ul>
