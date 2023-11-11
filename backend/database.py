@@ -88,7 +88,7 @@ def create_project(projectname: str, username: str) -> bool:
         return False
     
     # Add project
-    projects.insert_one({"id": generate_projectid(), "projectname": projectname, "users": [username]})
+    projects.insert_one({"id": generate_projectid(), "projectname": projectname, "checked_out": [0, 0], "users": [username]})
     
     return True
 
@@ -131,13 +131,13 @@ def checkout_hardware(project_id: int, hardware_index: int, qty: int) -> bool:
     project = projects.find_one({"id": project_id})
 
     if project == None:
-        return (False, 0)
+        return (False, 0, 0)
     
     # verify hwset exists
     hwset = hwsets.find_one({"index": hardware_index})
 
     if hwset == None:
-        return (False, 0)
+        return (False, 0, 0)
     
     # Take all available hardware if there is not enough
     if hwset["availability"] < qty:
@@ -146,31 +146,42 @@ def checkout_hardware(project_id: int, hardware_index: int, qty: int) -> bool:
     # Update hardwareset
     hwsets.update_one({"index": hardware_index}, {"$inc": {"availability": -qty}})
 
+    print(f"qty: {qty}, hardware_index: {hardware_index}")
+    
     # Update project
     projects.update_one({"id": project_id}, {"$inc": {"checked_out." + str(hardware_index): qty}})
     
-    return (True, projects.find_one({"id": project_id})["checked_out"][hardware_index])
+    return (True, projects.find_one({"id": project_id})["checked_out"][hardware_index], hwsets.find_one({"index": hardware_index})["availability"])
 
-def checkin_hardware(projectid: int, hwset: str, qty: int) -> bool:
-    if projectid == None or hwset == None or qty == None:
-        return False
-    
+def checkin_hardware(project_id: int, hardware_index: int, qty: int) -> bool:
     # Verify project exists
-    if projects.find_one({"id": projectid}) == None:
-        return False
+    project = projects.find_one({"id": project_id})
+
+    if project == None:
+        return (False, 0, 0)
     
-    # Verify hwset exists
-    if hwsets.find_one({"name": hwset}) == None:
-        return False
+    # verify hwset exists
+    hwset = hwsets.find_one({"index": hardware_index})
+
+    if hwset == None:
+        return (False, 0, 0)
     
-    #v Verify there is enough Capacity
-    if hwsets.find_one({"name": hwset})["capacity"] < qty:
-        return False
+    # Take all available hardware if there is not enough
+    if hwset["availability"] >= 100:
+        return (False, 0, 0)
     
-    # Update hwset
-    projects.update_one({"name": hwset}, {"$inc": {"available": qty}})
+    if project["checked_out"][hardware_index] < qty:
+        qty = project["checked_out"][hardware_index]
     
-    return True
+    # Update hardwareset
+    hwsets.update_one({"index": hardware_index}, {"$inc": {"availability": qty}})
+
+    print(f"qty: {qty}, hardware_index: {hardware_index}")
+    
+    # Update project
+    projects.update_one({"id": project_id}, {"$inc": {"checked_out." + str(hardware_index): -qty}})
+    
+    return (True, projects.find_one({"id": project_id})["checked_out"][hardware_index], hwsets.find_one({"index": hardware_index})["availability"])
 
 def get_projects(user_id: str) -> list:
     if user_id == None:
@@ -188,7 +199,7 @@ def get_projects(user_id: str) -> list:
     for project in projects.find({"users": username}):
 
         entry = {"projectId": project["id"], 
-                 "projectName": project["project_name"],
+                 "projectName": project["projectname"],
                  "authorizedUsers": project["users"],
                  "hardwareSets": []}
         

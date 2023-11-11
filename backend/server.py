@@ -50,53 +50,85 @@ def get_projects():
 
     return jsonify({"projects": projects, "success": True})
 
+@app.route('/create-project', methods=['POST'])
+def create_project():
+    data = request.get_json()
+
+    project_name = data.get('projectName')
+    user = data.get('user')
+
+    success = database.create_project(project_name, user)
+    
+    return jsonify({"success": success})
+
+@app.route('/join-project', methods=['POST'])
+def join_project():
+    data = request.get_json()
+
+    project_id = data.get('projectID')
+    user = data.get('user')
+
+    if project_id == None or user == None:
+        return jsonify({"success": False})
+
+    success = database.add_user_to_project(int(project_id), user)
+
+    return jsonify({"success": success})
+
 @app.route('/checkout', methods=['PUT'])
 def checkout():
     data = request.get_json()
 
     project_id = data.get('projectId')
     project = data.get('project')
-    hardware_index = data.get('hardwareIndex')
+    hardware_index = data.get('hardware_index')
     qty = data.get('qty')
+
+    print(f"project_id: {project_id}, project: {project}, hardware_index: {hardware_index}, qty: {qty}")
 
     if project == None or project_id == None or hardware_index == None or qty == None:
         return jsonify({"success": False})
 
-    success, new_quantity = database.checkout_hardware(project_id, int(hardware_index), int(qty))
+    success, new_quantity, new_availability = database.checkout_hardware(project_id, int(hardware_index), int(qty))
 
     print(success)
     print(project["hardwareSets"][hardware_index]["checkedOut"])
     if success:
+        project["hardwareSets"][hardware_index]["availability"] = new_availability
+        availability = new_availability
         project["hardwareSets"][hardware_index]["checkedOut"] = new_quantity
-        available = project["hardwareSets"][hardware_index]["availability"]
-
-    for key in project.keys():
-        print(f"{key}: {project[key]}")
-
+        return jsonify({"success": success , "project": project, "availability": availability})
+    else:
+        return jsonify({"success": False})
 
 
-    return jsonify({"success": success , "project": project, "availability": available})
-
-@app.route('/checkin1', methods=['PUT'])
-def checkin1():
+@app.route('/checkin', methods=['PUT'])
+def checkin():
     data = request.get_json()
 
-    project = data.get('project')
     project_id = data.get('projectId')
-    hardware = data.get('hardwareName')
+    project = data.get('project')
+    hardware_index = data.get('hardware_index')
     qty = data.get('qty')
-    qty = int(qty)
 
-    print(f"qty: {qty}")
-    # print(f"hardware: {hardware}")
-    success = database.checkin_hardware(project_id, hardware, qty)
+    print(f"project_id: {project_id}, project: {project}, hardware_index: {hardware_index}, qty: {qty}")
 
+    if project == None or project_id == None or hardware_index == None or qty == None:
+        return jsonify({"success": False})
+
+    success, new_quantity, new_availability = database.checkin_hardware(project_id, int(hardware_index), int(qty))
+
+    print(success)
+    print(project["hardwareSets"][hardware_index]["checkedOut"])
     if success:
-        project["hardwareSets"][0]["checkedOut"] -= qty
-        available = project["hardwareSets"][0]["availability"]
-    
-    print(f"success: {success} , project: {project}, availability: {available}")
-    return jsonify({"success": success , "project": project, "availability": available})
+        project["hardwareSets"][hardware_index]["availability"] = new_availability
+        availability = new_availability
+        project["hardwareSets"][hardware_index]["checkedOut"] = new_quantity
+        
+        return jsonify({"success": success , "project": project, "availability": availability})
+    else:
+        return jsonify({"success": False})
+
 
 if __name__ == "__main__":
     database.initialize_database()
