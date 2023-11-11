@@ -47,7 +47,8 @@
 }
 
 .project-grid {
-  display: flex;
+  display: grid;
+  place-items: center;
   flex-wrap: wrap;
   gap: 20px;
   /* Adjust the gap between projects */
