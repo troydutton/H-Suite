@@ -33,6 +33,7 @@ export const Manager = ({ user, projects }) => {
       <div className="project-grid">
         {projects.map((project) => (
           <Project
+            cur_user={user}
             project={project}
           />
         ))}

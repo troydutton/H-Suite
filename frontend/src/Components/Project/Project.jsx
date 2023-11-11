@@ -1,8 +1,10 @@
 // Project.jsx
 import React, { useState } from 'react';
 import './Project.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const Project = ({ project: initialProject }) => {
+const Project = ({cur_user, project: initialProject}) => {
   const [project, setProject] = useState(initialProject);
 
   const [inputValueCheckIn1, setInputValueCheckIn1] = useState(0);
@@ -10,10 +12,10 @@ const Project = ({ project: initialProject }) => {
   const [inputValueCheckIn2, setInputValueCheckIn2] = useState(0);
   const [inputValueCheckOut2, setInputValueCheckOut2] = useState(0);
   const [showAuthorizedUsers, setShowAuthorizedUsers] = useState(false);
-  const [isJoined, setIsJoined] = useState(false);
-
+  const [isJoined, setIsJoined] = useState(true);
 
   const { projectId, projectName, hardwareSets, authorizedUsers } = project;
+  const user = cur_user;
 
   const { hardwareName: hardwareName1, totalCapacity: totalCapacity1, availability: initialAvailability1, checkedOut: checkedOut1 } = hardwareSets[0];
   const { hardwareName: hardwareName2, totalCapacity: totalCapacity2, availability: initialAvailability2, checkedOut: checkedOut2 } = hardwareSets[1];
@@ -63,7 +65,43 @@ const Project = ({ project: initialProject }) => {
     }
   };
 
+  const leave_project = async () => {
+    const projectID = project.projectId;
+
+    const response = await fetch('/leave-project', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+
+      body: JSON.stringify({
+          projectID: projectID,
+          user: user
+
+      })
+    }); 
+    const data = await response.json();
+
+    if (data.success) {
+      toast.success("Left project.");
+      setIsJoined((prevState) => !prevState);
+    } else {
+      toast.warning("Can't leave project.");
+    }
+  }
+
+  const handleToggleJoinLeave = () => {
+    setIsJoined((prevState) => !prevState);
+  };
+
+  // Function to toggle authorized users dropdown
+  const handleToggleAuthorizedUsers = () => {
+    setShowAuthorizedUsers((prevState) => !prevState);
+  };
+
   return (
+    <div>
+      {isJoined ? 
     <div className="project-container">
       <h2>{projectName}</h2>
       <div className="hardware-sets">
@@ -130,7 +168,7 @@ const Project = ({ project: initialProject }) => {
       <div className="button-row">
         <button
           className={isJoined ? 'leave-button' : 'join-button'} // Dynamically change button color
-          onClick={handleToggleJoinLeave}
+          onClick={handleToggleJoinLeave && leave_project }
         >
           {isJoined ? 'Leave Project' : 'Join Project'}
         </button>
@@ -145,7 +183,11 @@ const Project = ({ project: initialProject }) => {
           </div>
         )}
       </div>
+      </div>
+      :
+       null}
     </div>
+
   );
 }
 
