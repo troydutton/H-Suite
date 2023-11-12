@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import './Project.css';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Project = ({cur_user, project: initialProject}) => {
@@ -185,8 +184,7 @@ const Project = ({cur_user, project: initialProject}) => {
       <div className="button-row">
         <button
           className={isJoined ? 'leave-button' : 'join-button'} // Dynamically change button color
-          onClick={handleToggleJoinLeave && leave_project }
-          {isJoined ? 'Leave Project' : 'Join Project'}
+          onClick={handleToggleJoinLeave && leave_project }>Leave Project
         </button>
         <button className="authorizedUsers-button">Authorized Users</button>
         {showAuthorizedUsers && (
