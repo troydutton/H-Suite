@@ -1,5 +1,8 @@
 # H-Suite
 
+<img src="frontend/login_page.png" alt="Login Page" width="400" />
+<img src="frontend/main_page.png" alt="Main Page" width="400"/>
+
 A Proof of Concept (PoC) web application for a Hardware-as-a-Service (HaaS) system, inspired by the University of Utah POWDER program. The web application will enable users to create and manage secure user accounts, projects, and hardware resources while ensuring scalability and security.
 
 # Getting Started
