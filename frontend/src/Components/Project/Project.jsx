@@ -119,7 +119,7 @@ const Project = ({cur_user, project: initialProject}) => {
     <div>
       {isJoined ? 
     <div className="project-container">
-      <h2>{projectName}</h2>
+      <h2>{`${projectName} (${projectId})`}</h2>
       <div className="hardware-sets">
         <div className="hardware-set-box">
           <h3>{hardwareName1}</h3>
@@ -186,7 +186,7 @@ const Project = ({cur_user, project: initialProject}) => {
           className={isJoined ? 'leave-button' : 'join-button'} // Dynamically change button color
           onClick={handleToggleJoinLeave && leave_project }>Leave Project
         </button>
-        <button className="authorizedUsers-button">Authorized Users</button>
+        <button className="authorizedUsers-button" onClick={handleToggleAuthorizedUsers}>Authorized Users</button>
         {showAuthorizedUsers && (
           <div className="authorized-users-dropdown">
             <ul>
