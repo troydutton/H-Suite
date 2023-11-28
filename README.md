@@ -33,4 +33,5 @@ To get the project set up, follow these steps:
 - Troy Dutton
 
 # Useful Links
+User Documentation: https://docs.google.com/document/d/12a-WquiLkgrSn6BxTmyMm6B9ufAnt2TClXOmz55_L6A/edit?usp=sharing
 https://docs.google.com/document/d/1rREMYh2eRJrQb0zMIihBB1D_p-PS3HYOJI4QeCMYmmk/edit
